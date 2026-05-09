@@ -1,0 +1,51 @@
+# GRN-Decoder VAE Configuration File
+
+# Model Architecture
+model:
+  n_genes: 200               # Number of genes
+  d_model: 64                # Model dimension
+  d_latent: 16               # Latent dimension
+  n_enc_layers: 2            # Number of encoder layers
+  grn_density: 0.03          # Density of synthetic GRN
+
+# Training Parameters
+training:
+  epochs: 30                 # Number of training epochs
+  batch_size: 64             # Batch size
+  lr: 1.0e-3                 # Learning rate
+  weight_decay: 1.0e-4       # Weight decay
+  gradient_clip: 1.0         # Gradient clipping threshold
+  kl_warmup: 10              # KL weight warmup epochs
+
+# Loss Parameters
+loss:
+  l1_lambda: 0.01            # L1 regularization strength
+  reconstruction_weight: 1.0  # Reconstruction loss weight
+  kl_weight: 1.0             # KL divergence weight
+  grn_consistency_weight: 0.1  # GRN consistency penalty weight
+
+# Data Parameters
+data:
+  n_cells: 2000              # Number of cells
+  val_split: 0.1             # Validation split ratio
+  seed: 42                   # Random seed
+
+# VAE Parameters
+vae:
+  use_zinb: true             # Use zero-inflated negative binomial
+  beta: 1.0                  # KL divergence weight (final)
+  latent_prior: "normal"     # Latent prior distribution
+
+# Evaluation
+evaluation:
+  compute_edge_recovery: true     # Evaluate GRN edge recovery
+  compute_in_silico_ko: true      # Run in silico knockout
+  compute_calibration: true       # Evaluate calibration
+  edge_threshold: 0.05            # Threshold for edge prediction
+  save_checkpoints: true          # Save model checkpoints
+  checkpoint_dir: "checkpoints/grn_vae"  # Checkpoint directory
+
+# Real Data (Optional)
+real_data:
+  h5ad_path: null            # Path to real expression data (null = use synthetic)
+  grn_path: null             # Path to GRN adjacency matrix (null = use synthetic)

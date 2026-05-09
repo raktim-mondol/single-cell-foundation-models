@@ -1,0 +1,51 @@
+# SpaceTime-scFM Configuration File
+
+# Model Architecture
+model:
+  n_genes: 500               # Number of genes
+  d_model: 128               # Model dimension
+  n_heads: 4                 # Number of attention heads
+  n_layers: 4                # Number of transformer layers
+  spatial_dim: 2             # Spatial dimensions (2 for Visium, 3 for 3D MERFISH)
+
+# Training Parameters
+training:
+  epochs: 20                 # Number of training epochs
+  batch_size: 64             # Batch size
+  lr: 1.0e-4                 # Learning rate
+  weight_decay: 1.0e-4       # Weight decay
+  gradient_clip: 1.0         # Gradient clipping threshold
+  mask_spatial_prob: 0.15    # Probability of masking spatial coordinates
+
+# Data Parameters
+data:
+  n_cells: 2000              # Number of cells
+  spatial_frac: 0.6          # Fraction of cells with spatial coordinates
+  pt_frac: 0.4               # Fraction of cells with pseudotime
+  val_split: 0.1             # Validation split ratio
+  seed: 42                   # Random seed
+
+# Multi-modal Parameters
+multimodal:
+  use_spatial: true          # Use spatial modality
+  use_pseudotime: true       # Use pseudotime modality
+  mosaic_training: true      # Use mosaic training (variable modality presence)
+
+# Loss Weights
+loss:
+  gene_recon_weight: 1.0     # Gene reconstruction loss weight
+  spatial_pred_weight: 0.5   # Spatial prediction loss weight
+  pt_regress_weight: 0.5     # Pseudotime regression loss weight
+  niche_pred_weight: 0.3     # Niche prediction loss weight
+
+# Evaluation
+evaluation:
+  compute_niche_prediction: true  # Evaluate niche prediction
+  save_checkpoints: true          # Save model checkpoints
+  checkpoint_dir: "checkpoints/spacetime"  # Checkpoint directory
+
+# Real Data (Optional)
+real_data:
+  h5ad_path: null            # Path to real spatial data (null = use synthetic)
+  coords_key: "spatial"      # Key for spatial coordinates in AnnData
+  pt_key: "pseudotime"       # Key for pseudotime in AnnData

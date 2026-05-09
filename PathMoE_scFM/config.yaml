@@ -1,0 +1,40 @@
+# PathMoE-scFM Configuration File
+
+# Model Architecture
+model:
+  n_genes: 2000              # Number of genes in vocabulary
+  n_experts: 50              # Number of pathway experts
+  top_k: 4                   # Active experts per token
+  d_model: 128               # Model dimension
+  n_heads: 4                 # Number of attention heads
+  n_layers: 4                # Number of transformer layers
+  n_bins: 10                 # Number of expression bins
+  mask_ratio: 0.15           # Masking ratio for pretraining
+
+# Training Parameters
+training:
+  pretrain_epochs: 20        # Number of pretraining epochs
+  finetune_epochs: 10        # Number of fine-tuning epochs
+  batch_size: 64             # Batch size
+  lr: 1.0e-4                 # Learning rate
+  weight_decay: 1.0e-4       # Weight decay
+  gradient_clip: 1.0         # Gradient clipping threshold
+
+# Data Parameters
+data:
+  n_cells: 5000              # Number of synthetic cells
+  n_classes: 10              # Number of cell types
+  val_split: 0.1             # Validation split ratio
+  seed: 42                   # Random seed
+
+# Evaluation
+evaluation:
+  compute_pathway_recovery: true  # Compute pathway recovery metrics
+  save_checkpoints: true          # Save model checkpoints
+  checkpoint_dir: "checkpoints/pathmoe"  # Checkpoint directory
+
+# Real Data (Optional)
+real_data:
+  h5ad_path: null            # Path to real AnnData file (null = use synthetic)
+  normalize: true            # Normalize real data
+  log_transform: true        # Apply log1p transformation

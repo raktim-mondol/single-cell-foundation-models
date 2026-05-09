@@ -1,0 +1,52 @@
+# Atlas-Streamer Configuration File
+
+# Model Architecture
+model:
+  n_genes_init: 500          # Initial gene vocabulary size
+  d_model: 64                # Model dimension
+  n_layers: 2                # Number of transformer layers
+
+# Continual Learning Parameters
+continual:
+  n_releases: 5              # Number of simulated atlas releases
+  gene_growth: 50            # New genes added per release
+  buffer_cap: 5000           # Experience replay buffer capacity
+  update_steps: 100          # Training steps per release
+
+# Data Parameters
+data:
+  cells_per_release: 500     # Cells per atlas release
+  n_cell_types_init: 8       # Initial number of cell types
+  new_types_per_release: 2   # New cell types per release
+  seed: 42                   # Random seed
+
+# Training Parameters
+training:
+  lr: 1.0e-4                 # Learning rate
+  weight_decay: 1.0e-4       # Weight decay
+  gradient_clip: 1.0         # Gradient clipping threshold
+  distill_weight: 0.5        # Knowledge distillation weight
+  replay_weight: 0.3         # Experience replay weight
+
+# Self-Distillation Parameters
+distillation:
+  temperature: 2.0           # Temperature for soft targets
+  alpha: 0.5                 # Balance between distillation and task loss
+
+# Importance Sampling Parameters
+replay:
+  sampling_strategy: "importance"  # Sampling strategy (random, importance, uncertainty)
+  update_frequency: 1        # Update buffer every N releases
+  diversity_weight: 0.2      # Weight for diversity in sampling
+
+# Evaluation
+evaluation:
+  compute_backward_transfer: true  # Evaluate backward transfer
+  compute_forward_transfer: true   # Evaluate forward transfer
+  compute_forgetting: true         # Measure catastrophic forgetting
+  save_checkpoints: true           # Save model checkpoints
+  checkpoint_dir: "checkpoints/atlas"  # Checkpoint directory
+
+# Real Data (Optional)
+real_data:
+  data_dir: null             # Path to real atlas releases directory (null = use synthetic)

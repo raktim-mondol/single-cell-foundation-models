@@ -1,0 +1,41 @@
+# CausalCellFM Configuration File
+
+# Model Architecture
+model:
+  n_genes: 1000              # Number of genes
+  d_model: 128               # Model dimension
+  n_heads: 4                 # Number of attention heads
+  enc_layers: 3              # Encoder layers
+  dec_layers: 3              # Decoder layers
+  n_batches: 5               # Number of batches/donors
+
+# Training Parameters
+training:
+  epochs: 20                 # Number of training epochs
+  batch_size: 64             # Batch size
+  lr: 1.0e-4                 # Learning rate
+  weight_decay: 1.0e-4       # Weight decay
+  gradient_clip: 1.0         # Gradient clipping threshold
+
+# Data Parameters
+data:
+  n_cells: 3000              # Number of synthetic cells
+  max_pert_genes: 5          # Maximum perturbed genes per cell
+  val_split: 0.15            # Validation split ratio
+  seed: 42                   # Random seed
+
+# Causal Parameters
+causal:
+  de_weight: 2.0             # Weight for DE loss
+  inv_weight: 0.1            # Weight for invariance loss
+  kl_weight: 0.01            # Weight for KL divergence
+
+# Evaluation
+evaluation:
+  compute_causal_test: true  # Run causal direction test
+  save_checkpoints: true     # Save model checkpoints
+  checkpoint_dir: "checkpoints/causalcell"  # Checkpoint directory
+
+# Real Data (Optional)
+real_data:
+  h5ad_path: null            # Path to real perturb-seq data (null = use synthetic)

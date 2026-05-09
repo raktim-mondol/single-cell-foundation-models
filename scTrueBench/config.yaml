@@ -1,0 +1,60 @@
+# scTrueBench Configuration File
+
+# Benchmark Parameters
+benchmark:
+  n_cells: 500               # Number of cells
+  n_genes: 200               # Number of genes
+  n_types: 5                 # Number of cell types
+  n_batches: 3               # Number of batches
+  seed: 42                   # Random seed
+
+# Causal Evaluation Parameters
+causal:
+  enable: true               # Enable causal evaluation
+  compute_correlation: true  # Compute correlation metrics
+  compute_direction: true    # Compute direction accuracy
+  compute_magnitude: true    # Compute magnitude accuracy
+  perturbation_types: ["KO", "OE"]  # Perturbation types to evaluate
+
+# Calibration Evaluation Parameters
+calibration:
+  enable: true               # Enable calibration evaluation
+  compute_coverage: true     # Compute coverage metrics
+  compute_ece: true          # Compute expected calibration error
+  confidence_levels: [0.5, 0.8, 0.9, 0.95]  # Confidence levels to evaluate
+  n_mc_samples: 30           # Number of Monte Carlo samples
+
+# Wet-Lab Parameters
+wetlab:
+  enable: true               # Enable wet-lab registry
+  registry_path: "wetlab_registry_demo"  # Path to wet-lab registry
+  auto_register: true        # Automatically register predictions
+  track_outcomes: true       # Track experimental outcomes
+
+# Baseline Models
+baselines:
+  random:
+    enable: true             # Enable random baseline
+    n_components: 32         # Embedding dimension
+  
+  pca:
+    enable: true             # Enable PCA baseline
+    n_components: 32         # Number of PCA components
+
+# Model Integration
+model:
+  custom_models: []          # List of custom model names to evaluate
+  model_dir: "models"        # Directory for custom model implementations
+
+# Evaluation Parameters
+evaluation:
+  save_results: true         # Save evaluation results
+  results_dir: "benchmark_results"  # Results directory
+  generate_report: true      # Generate evaluation report
+  save_embeddings: false     # Save model embeddings
+  save_predictions: false    # Save model predictions
+
+# Real Data (Optional)
+real_data:
+  benchmark_data_path: null  # Path to real benchmark data (null = use synthetic)
+  grn_path: null             # Path to real GRN (null = use synthetic)
