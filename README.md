@@ -6,6 +6,52 @@ Six novel methods for single-cell foundation model research, addressing critical
 
 This repository implements state-of-the-art foundation models for single-cell genomics that go beyond current approaches by incorporating biological priors, causal reasoning, and comprehensive evaluation frameworks. Each method is modular, well-documented, and tested with synthetic data for immediate validation.
 
+## 🏗️ Architecture Overview
+
+```mermaid
+graph TB
+    subgraph "Single-Cell Foundation Models"
+        A[PathMoE-scFM<br/>Pathway-aware MoE]
+        B[CausalCellFM<br/>Causal Perturbations]
+        C[SpaceTime-scFM<br/>Spatio-Temporal]
+        D[Atlas_Streamer<br/>Continual Learning]
+        E[GRN-Decoder VAE<br/>GRN-Constrained]
+        F[scTrueBench<br/>Benchmark Suite]
+    end
+    
+    subgraph "Addressed Gaps"
+        G[Causation]
+        H[Bio Priors]
+        I[Space/Time]
+        J[Calibration]
+        K[Continual]
+        L[Wet-Lab]
+    end
+    
+    A --> H
+    A --> J
+    B --> G
+    B --> L
+    C --> I
+    C --> H
+    D --> K
+    E --> G
+    E --> H
+    F --> G
+    F --> H
+    F --> I
+    F --> J
+    F --> K
+    F --> L
+    
+    style A fill:#e1f5ff
+    style B fill:#ffe1f5
+    style C fill:#e1ffe1
+    style D fill:#fff5e1
+    style E fill:#f5e1ff
+    style F fill:#e1f5f5
+```
+
 ## 📦 Methods
 
 | Method | Description | Gaps Addressed |
@@ -21,8 +67,8 @@ This repository implements state-of-the-art foundation models for single-cell ge
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/single_cell_genomics.git
-cd single_cell_genomics
+git clone https://github.com/raktim-mondol/single-cell-foundation-models.git
+cd single-cell-foundation-models
 
 # Install dependencies
 pip install -r requirements.txt
@@ -163,7 +209,99 @@ training:
   lr: 1.0e-4
 ```
 
+## 🔄 Workflow Diagram
+
+```mermaid
+graph LR
+    A[Start] --> B[Clone Repository]
+    B --> C[Install Dependencies]
+    C --> D{Choose Method}
+    
+    D -->|PathMoE-scFM| E[Run PathMoE_scFM]
+    D -->|CausalCellFM| F[Run CausalCellFM]
+    D -->|SpaceTime-scFM| G[Run SpaceTime_scFM]
+    D -->|Atlas-Streamer| H[Run Atlas_Streamer]
+    D -->|GRN-Decoder VAE| I[Run GRN_Decoder_VAE]
+    D -->|scTrueBench| J[Run scTrueBench]
+    D -->|All Methods| K[Run test_all_methods.py]
+    
+    E --> L[Synthetic Data Generation]
+    F --> L
+    G --> L
+    H --> L
+    I --> L
+    J --> L
+    K --> M[Automated Testing]
+    
+    L --> N[Model Training]
+    M --> N
+    
+    N --> O[Evaluation & Metrics]
+    O --> P[Results & Checkpoints]
+    
+    P --> Q{Use Real Data?}
+    Q -->|Yes| R[Provide h5ad File]
+    Q -->|No| S[Use Synthetic Results]
+    
+    R --> T[Train on Real Data]
+    T --> O
+    S --> U[End]
+    
+    style A fill:#90EE90
+    style K fill:#FFD700
+    style U fill:#FFB6C1
+```
+
 ## 🧪 Testing
+
+### Modular Structure
+
+Each method follows a consistent modular architecture:
+
+```mermaid
+graph TB
+    subgraph "Method Directory Structure"
+        A[method_name/]
+        B[__init__.py<br/>Package exports]
+        C[README.md<br/>Documentation]
+        D[config.yaml<br/>Configuration]
+        E[model.py<br/>Architecture]
+        F[train.py<br/>Training loop]
+        G[utils.py<br/>Utilities]
+    end
+    
+    subgraph "Data Flow"
+        H[Raw Data<br/>.h5ad or Synthetic]
+        I[Data Processing<br/>utils.py]
+        J[Model<br/>model.py]
+        K[Training<br/>train.py]
+        L[Evaluation<br/>utils.py]
+        M[Results<br/>Checkpoints & Metrics]
+    end
+    
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    
+    D -.-> K
+    E -.-> J
+    F -.-> K
+    G -.-> I
+    G -.-> L
+    
+    style A fill:#f0f0f0
+    style H fill:#90EE90
+    style M fill:#FFB6C1
+```
 
 ### Synthetic Data Testing
 
@@ -204,9 +342,9 @@ If you use this code in your research, please cite:
 ```bibtex
 @software{single_cell_foundation_models,
   title={Single-Cell Foundation Models: Novel Methods for Causal Reasoning and Biological Priors},
-  author={Your Name},
+  author={Mondol, Raktim},
   year={2025},
-  url={https://github.com/yourusername/single_cell_genomics}
+  url={https://github.com/raktim-mondol/single-cell-foundation-models}
 }
 ```
 
@@ -313,7 +451,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For questions, issues, or suggestions:
 - Open an issue on GitHub
-- Contact: your.email@example.com
+- Contact: dr.raktim.mondol@gmail.com
 
 ---
 
